@@ -8,9 +8,9 @@ We identify the toxic word, mask it and run our fine tuned BERT to generate the 
 
 ### Identification of toxic word
 - To mask the toxic word we use the following approaches
-    - Bag of words: we simply mask the words present in a pre-existing list of toxic and non toxic words. We obtained this list by running `NgramSalienceCalculator` the previous lists. (code present [here](./script/detox.ipynb))
-    - Linear Regression: a word2vec coefficient is given, by fitting the data to the toxic and non toxic corpus
-    - Using `Roberta`, a toxic sentence classifier. For a toxic sentence of n words, we create n variations of the sentence by masking a different word in each variant. We then run these variants through the Classifier to identify the sentence with the least toxicity.
+    - Bag of words: we simply mask the words present in a pre-existing list of toxic and non toxic words. We obtained this list by running `NgramSalienceCalculator` on the previous lists. (code present [here](./script/detox.ipynb))
+    - Linear Regression: A  coefficient is generated for each word by fitting the data linearly onto the toxic and non toxic corpus.
+    - Using `Roberta`, a toxic sentence classifier. For a toxic sentence of n words, we create n variations of the sentence by masking a different word in each variant. If the sentence is below a toxic threshold, we return this sentence. Else, we further mask another token in this sentence. This process is done until the sentence is below the threshold. 
 
 ### Generating Alternatives 
 - To generate substitutes for the masked tokens we use the BERT model trained on Masked Language Model. 
@@ -29,7 +29,7 @@ We identify the toxic word, mask it and run our fine tuned BERT to generate the 
 
 - Now, this fine tuned BERT will give us 10 possible alternatives to the originally masked token.
 - We will evaluate the alternatives by using the product of similarity with respect to the original masked token with the fluency and non-toxicity.
-- Similarity will be determined by using cosine similarity, fluency by [`CoLA`](https://nyu-mll.github.io/CoLA/) and non-toxicity using [`Roberta`](https://huggingface.co/SkolkovoInstitute/roberta_toxicity_classifier)
+- Similarity will be determined by using cosine similarity, fluency by [`GPT2LMHeadModel`](https://huggingface.co/docs/transformers/model_doc/gpt2) and non-toxicity using [`Roberta`](https://huggingface.co/SkolkovoInstitute/roberta_toxicity_classifier)
 
 ## Repository Structure
 
