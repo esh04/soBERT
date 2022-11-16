@@ -9,7 +9,7 @@ We identify the toxic word, mask it and run our fine tuned BERT to generate the 
 ### Identification of toxic word
 - To mask the toxic word we use the following approaches
     - Bag of words: we simply mask the words present in a pre-existing list of toxic and non toxic words. We obtained this list by running `NgramSalienceCalculator` the previous lists. (code present [here](./script/detox.ipynb))
-    - Linear Regression
+    - Linear Regression: a word2vec coefficient is given, by fitting the data to the toxic and non toxic corpus
     - Using `Roberta`, a toxic sentence classifier. For a toxic sentence of n words, we create n variations of the sentence by masking a different word in each variant. We then run these variants through the Classifier to identify the sentence with the least toxicity.
 
 ### Generating Alternatives 
