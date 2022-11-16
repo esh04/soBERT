@@ -22,14 +22,19 @@ We identify the toxic word, mask it and run our fine tuned BERT to generate the 
 - While generating the actual tokens for our specific task, we always pass the flag 0 as we want the output to be non toxic.
 
 - We use the following approaches to MASK tokens for fine tuning:
-    - Random Approach: one word at random is masked in the sentence
-    - Bag of words approach: mask the words present in a pre-existing list of toxic and non toxic words.
+    - Random Approach: one word at random is masked in the sentence. This approach was suggested by the paper [`Conditional BERT Contextual Augmentation`](https://arxiv.org/abs/1812.06705). 
+    - Targetted approach: mask the words present in a pre-existing list of toxic and non toxic words.
 
 ### Choosing the correct alternative
 
 - Now, this fine tuned BERT will give us 10 possible alternatives to the originally masked token.
 - We will evaluate the alternatives by using the product of similarity with respect to the original masked token with the fluency and non-toxicity.
 - Similarity will be determined by using cosine similarity, fluency by [`GPT2LMHeadModel`](https://huggingface.co/docs/transformers/model_doc/gpt2) and non-toxicity using [`Roberta`](https://huggingface.co/SkolkovoInstitute/roberta_toxicity_classifier)
+
+
+- We also provide multi token alternatives by replacing a the sings masks with a double masks, and then comparing the output with that obtained from a single mask. An example is as follows:
+
+![Example 3](./examples/multi.jpeg)
 
 ## Repository Structure
 
@@ -70,15 +75,22 @@ Further,
 
 The fine tuned BERT models can be found [here](https://iiitaphyd-my.sharepoint.com/:f:/g/personal/eshika_k_research_iiit_ac_in/EiGJLE_32NVEqzGDiNUx6WgBP6ZGWgYDQjcd6CvvOBBPJw?e=caBKUH)
 
+
 ## Qualitative Analysis
 
+Some examples of the output obtained:
+
+![Example 1](./examples/ex1.jpeg)
+
+![Example 2](./examples/ex2.jpeg)
+
+![Example 3](./examples/ex3.jpeg)
+
+## Observation
+The targetted fine tuned model showcased better results as compared to the random fine tuned model suggested by the paper [`Conditional BERT Contextual Augmentation`](https://arxiv.org/abs/1812.06705). 
 
 
-- random approach
-- 4th epoch
-validation score: 0.026597120194012114
+For example,
 
-you should [MASK] yourself
 
-toxic: kill
-non toxic: introduce
+![Example 1](./examples/ex4.jpeg)
