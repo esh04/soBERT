@@ -32,7 +32,7 @@ We identify the toxic word, mask it and run our fine tuned BERT to generate the 
 - Similarity will be determined by using cosine similarity, fluency by [`GPT2LMHeadModel`](https://huggingface.co/docs/transformers/model_doc/gpt2) and non-toxicity using [`Roberta`](https://huggingface.co/SkolkovoInstitute/roberta_toxicity_classifier)
 
 
-- We also provide multi token alternatives by replacing a the sings masks with a double masks, and then comparing the output with that obtained from a single mask. An example is as follows:
+- We also provide multi token alternatives by replacing the single masks with a double masks, and then comparing the output with that obtained from a single mask. An example is as follows:
 
 ![Example 3](./examples/multi.jpeg)
 
@@ -94,3 +94,13 @@ For example,
 
 
 ![Example 1](./examples/ex4.jpeg)
+
+
+## Results
+
+The metric used to evaluate our model was (similarity*fluency)/(perplexities).
+The scores obtained were as follows:
+
+- Baseline Model (T5 Paraphraser): 4.370629371e-3
+- Random-masked BERT: 1.419647927e-2
+- Target-masked BERT: 1.744591766e-2
