@@ -68,7 +68,7 @@ Further,
 
 ## Models
 
-The fine tuned BERT models can be found [here]()
+The fine tuned BERT models can be found [here](https://iiitaphyd-my.sharepoint.com/:f:/g/personal/eshika_k_research_iiit_ac_in/EiGJLE_32NVEqzGDiNUx6WgBP6ZGWgYDQjcd6CvvOBBPJw?e=caBKUH)
 
 ## Qualitative Analysis
 
